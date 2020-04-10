@@ -52,8 +52,9 @@ public class Lexer {
 
     private void inKeyword(Character current) {
         if (current == null || Character.isWhitespace(current)) {
-            if (currentToken.equals("schrijf")) {
-
+            if (currentToken.equals("schrijfn")) {
+                tokens.add(new Token(TokenType.SCHRIJFN, 0, null));
+            } else if (currentToken.equals("schrijf")) {
                 tokens.add(new Token(TokenType.SCHRIJF, 0, null));
             } else if (isNumeric(currentToken)) {
 

@@ -2,7 +2,7 @@ package parser;
 
 import lexer.Token;
 import lexer.TokenType;
-import syntax.SchrijfStatement;
+import syntax.SchrijfnStatement;
 import syntax.Statement;
 
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ public class Parser {
             TokenType first = stack.get(0).getType();
             TokenType second = stack.get(1).getType();
 
-            if (first == TokenType.SCHRIJF &&
+            if (first == TokenType.SCHRIJFN &&
                     (second == TokenType.STRING || second == TokenType.NUMBER)) {
-                statement = new SchrijfStatement(stack.get(1).getValue());
+                statement = new SchrijfnStatement(stack.get(1).getValue());
                 stack.clear();
             }
         }
