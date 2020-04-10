@@ -30,7 +30,11 @@ public class Parser {
         Statement statement = null;
 
         if (stack.size() == 2) {
-            if (stack.get(0).getType() == TokenType.SCHRIJF && stack.get(1).getType() == TokenType.STRING) {
+            TokenType first = stack.get(0).getType();
+            TokenType second = stack.get(1).getType();
+
+            if (first == TokenType.SCHRIJF &&
+                    (second == TokenType.STRING || second == TokenType.NUMBER)) {
                 statement = new SchrijfStatement(stack.get(1).getValue());
                 stack.clear();
             }
