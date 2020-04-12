@@ -1,7 +1,9 @@
 import executor.Executor;
+import jdk.nashorn.internal.runtime.regexp.joni.Syntax;
 import lexer.Lexer;
 import lexer.Token;
 import parser.Parser;
+import parser.SyntaxTree;
 import syntax.Statement;
 
 import java.io.BufferedReader;
@@ -34,21 +36,9 @@ public class Main {
         line = reader.readLine();
         while (line != null) {
             tokens = lexer.lex(line);
-
-//            System.out.println("\nTokens\n------");
-//            for (Token token : tokens) {
-//                System.out.println(token.getType());
-//            }
-
             assert tokens != null;
-            List<Statement> statements = parser.parse(tokens);
-
-            if (statements.isEmpty()) {
-                System.out.println("\nVerklaring kan niet worden geparseerd\n");
-            }  //                System.out.println("\nOutcome:");
-
-
-            executor.execute(statements);
+            SyntaxTree tree = parser.parse(tokens);
+            executor.execute(tree);
             if (repl) {
                 System.out.print("> ");
             }

@@ -1,46 +1,18 @@
 package parser;
 
 import lexer.Token;
-import lexer.TokenType;
-import syntax.SchrijfnStatement;
-import syntax.Statement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
 
-    List<Token> stack;
+    public SyntaxTree parse(List<Token> tokens) {
+        SyntaxTree tree = new SyntaxTree();
 
-    public List<Statement> parse(List<Token> tokens) {
-
-        this.stack = new ArrayList<>();
-        List<Statement> statements = new ArrayList<>();
         for (Token token : tokens) {
-            stack.add(token);
-            Statement statement = checkForStatement();
-            if (statement != null)
-                statements.add(statement);
+            tree.add(token);
         }
 
-        return statements;
+        return tree;
     }
-
-    private Statement checkForStatement() {
-        Statement statement = null;
-
-        if (stack.size() == 2) {
-            TokenType first = stack.get(0).getType();
-            TokenType second = stack.get(1).getType();
-
-            if (first == TokenType.SCHRIJFN &&
-                    (second == TokenType.STRING || second == TokenType.NUMBER)) {
-                statement = new SchrijfnStatement(stack.get(1).getValue());
-                stack.clear();
-            }
-        }
-
-        return statement;
-    }
-
 }

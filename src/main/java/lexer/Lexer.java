@@ -1,5 +1,7 @@
 package lexer;
 
+import syntax.TokenType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +27,10 @@ public class Lexer {
                     if (current == '"') {
                         inString = true;
                         currentToken = "";
+                    } else if (current == '+') {
+                        tokens.add(new Token(TokenType.ADD, 0, null));
                     } else if (current == '=') {
-                      tokens.add(new Token(TokenType.ASSIGN, 0, null));
+                        tokens.add(new Token(TokenType.ASSIGN, 0, null));
                     } else {
                         inKeyword = true;
                         currentToken = String.format("%c", current);
@@ -43,7 +47,7 @@ public class Lexer {
 
     private void inString(char current) {
         if (current == '"') {
-            tokens.add(new Token(TokenType.STRING, 0, currentToken));
+            tokens.add(new Token(TokenType.STRING_LITERAL, 0, currentToken));
             inString = false;
         } else {
             currentToken += current;
@@ -58,7 +62,7 @@ public class Lexer {
                 tokens.add(new Token(TokenType.SCHRIJF, 0, null));
             } else if (isNumeric(currentToken)) {
 
-                tokens.add(new Token(TokenType.NUMBER, 0, currentToken));
+                tokens.add(new Token(TokenType.NUMBER_LITERAL, 0, currentToken));
             } else {
 
                 tokens.add(new Token(TokenType.IDENTIFIER, 0, currentToken));

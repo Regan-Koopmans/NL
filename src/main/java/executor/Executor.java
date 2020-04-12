@@ -1,23 +1,19 @@
 package executor;
 
-import lexer.Token;
-import syntax.Statement;
-
-import java.util.ArrayList;
-import java.util.List;
+import parser.SyntaxTree;
 
 public class Executor {
+
+    private NameTable table;
 
     public Executor() {
 
     }
 
-    public void execute(List<Statement> statements) {
+    public void execute(SyntaxTree tree) {
 
-        for (Statement statement : statements) {
-            statement.execute();
-        }
+        tree.getRoot().execute();
+
 
     }
-
 }

@@ -1,1 +1,2 @@
-schrijfn "hallo wereld!"
+schrijfn "hallo" + " wereld!"
+schrijfn "yes!"

@@ -1,5 +1,7 @@
 package lexer;
 
+import syntax.TokenType;
+
 public class Token {
 
     private TokenType type;
